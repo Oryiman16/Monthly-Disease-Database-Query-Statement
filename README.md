@@ -91,7 +91,7 @@ on animalsaffected.parent = diseasetable.`code`
 inner join location
 on location.parent= diseasetable.`code`
 
-select * from basesfordiagnosis
+--4 Table Join
 
 select outlet, disease, species, `basis of diagnosis`
 from animalsaffected
@@ -102,6 +102,7 @@ on location.parent= diseasetable.`code`
 inner join basesfordiagnosis
 on basesfordiagnosis.parent = location.parent
 
+--5 Table Join
 
 select outlet, disease, species, `basis of diagnosis`, `disease control measure`
 from animalsaffected
@@ -113,3 +114,13 @@ inner join basesfordiagnosis
 on basesfordiagnosis.parent = location.parent
 inner join diseasecontrolmeasure
 on basesfordiagnosis.parent = diseasecontrolmeasure.parent
+
+-- Outlet with Highest Death 
+
+Select outlet, MAX(`number of death`) as TotalDeathCount
+From animalsaffected
+inner join location
+on location.parent = animalsaffected.parent
+Group by outlet
+order by TotalDeathCount desc
+
